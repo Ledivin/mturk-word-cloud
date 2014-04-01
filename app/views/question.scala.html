@@ -5,6 +5,16 @@
       <Text>Answer the questions below about the following url: @url</Text>      
   </Overview>
   <Question>
+    <QuestionIdentifier>author</QuestionIdentifier>
+    <QuestionContent>
+      <Text>Who posted the question?</Text>
+    </QuestionContent>
+    <AnswerSpecification>
+      <FreeTextAnswer>
+      </FreeTextAnswer>
+    </AnswerSpecification>
+  </Question>
+  <Question>
     <QuestionIdentifier>moreThanOneQuestion</QuestionIdentifier>
     <QuestionContent>
       <Text>Does the original poster pose more than one question in the post?</Text>
@@ -14,11 +24,11 @@
         <StyleSuggestion>radiobutton</StyleSuggestion>
         <Selections>
           <Selection>
-            <SelectionIdentifier>moreThanOneQuestionYes</SelectionIdentifier>
+            <SelectionIdentifier>Yes</SelectionIdentifier>
             <Text>Yes</Text>
           </Selection>
           <Selection>
-            <SelectionIdentifier>moreThanOneQuestionNo</SelectionIdentifier>
+            <SelectionIdentifier>No</SelectionIdentifier>
             <Text>No</Text>
           </Selection>
         </Selections>
@@ -26,7 +36,7 @@
     </AnswerSpecification>
   </Question>
   <Question>
-    <QuestionIdentifier>whyPblm</QuestionIdentifier>
+    <QuestionIdentifier>whyProblem</QuestionIdentifier>
     <QuestionContent>
       <Text>Does the original poster explain how or why the problem was initially encountered?</Text>
     </QuestionContent>
@@ -35,12 +45,97 @@
         <StyleSuggestion>radiobutton</StyleSuggestion>
         <Selections>
           <Selection>
-            <SelectionIdentifier>whyPblmYes</SelectionIdentifier>
+            <SelectionIdentifier>Yes</SelectionIdentifier>
             <Text>Yes</Text>
           </Selection>
           <Selection>
-            <SelectionIdentifier>whyPblmNo</SelectionIdentifier>
+            <SelectionIdentifier>No</SelectionIdentifier>
             <Text>No</Text>
+          </Selection>
+        </Selections>
+      </SelectionAnswer>
+    </AnswerSpecification>
+  </Question>
+  <Question>
+    <QuestionIdentifier>previousAttempts</QuestionIdentifier>
+    <QuestionContent>
+      <Text>Does the original poster discuss any previous attempts to solve the problem?</Text>
+    </QuestionContent>
+    <AnswerSpecification>
+      <SelectionAnswer>
+        <StyleSuggestion>radiobutton</StyleSuggestion>
+        <Selections>
+          <Selection>
+            <SelectionIdentifier>Yes</SelectionIdentifier>
+            <Text>Yes</Text>
+          </Selection>
+          <Selection>
+            <SelectionIdentifier>No</SelectionIdentifier>
+            <Text>No</Text>
+          </Selection>
+        </Selections>
+      </SelectionAnswer>
+    </AnswerSpecification>
+  </Question>
+  <Question>
+    <QuestionIdentifier>tone</QuestionIdentifier>
+    <QuestionContent>
+      <Text>On a scale of 1-7, please rate the overall tone of the original post.</Text>
+    </QuestionContent>
+    <AnswerSpecification>
+      <SelectionAnswer>
+        <StyleSuggestion>dropdown</StyleSuggestion>
+        <Selections>
+          <Selection>
+            <SelectionIdentifier>1</SelectionIdentifier>
+            <Text>1 - Very negative</Text>
+          </Selection>
+          <Selection>
+            <SelectionIdentifier>2</SelectionIdentifier>
+            <Text>2</Text>
+          </Selection>
+          <Selection>
+            <SelectionIdentifier>3</SelectionIdentifier>
+            <Text>3</Text>
+          </Selection>
+          <Selection>
+            <SelectionIdentifier>4</SelectionIdentifier>
+            <Text>4 - Neutral</Text>
+          </Selection>
+          <Selection>
+            <SelectionIdentifier>5</SelectionIdentifier>
+            <Text>5</Text>
+          </Selection>
+          <Selection>
+            <SelectionIdentifier>6</SelectionIdentifier>
+            <Text>6</Text>
+          </Selection>
+          <Selection>
+            <SelectionIdentifier>7</SelectionIdentifier>
+            <Text>7 - Very positive</Text>
+          </Selection>
+        </Selections>
+      </SelectionAnswer>
+    </AnswerSpecification>
+  </Question>
+  <Question>
+    <QuestionIdentifier>askerKnowledge</QuestionIdentifier>
+    <QuestionContent>
+      <Text>Which phrase best applies to the original post?</Text>
+    </QuestionContent>
+    <AnswerSpecification>
+      <SelectionAnswer>
+        <StyleSuggestion>radiobutton</StyleSuggestion>
+        <Selections>
+          <Selection>
+            <SelectionIdentifier>knows</SelectionIdentifier>
+            <Text>The poster knows what question he/she needs to ask in order to get the information necessary to solve the problem and makes a specific request for that information.
+</Text>
+          </Selection>
+          <Selection>
+            <SelectionIdentifier>not</SelectionIdentifier>
+            <Text>The poster makes a general request for any type of help solving a problem that he/she does not fully understand.
+</Text>
           </Selection>
         </Selections>
       </SelectionAnswer>

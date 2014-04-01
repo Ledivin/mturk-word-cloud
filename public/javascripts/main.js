@@ -39,7 +39,7 @@ $(function() {
 				reward: reward
 			}),
 			success : function(data) {
-                
+                				
                 $("#result").text("The following HITs have been generated:");
                 
                 for(var key in data) {
@@ -62,9 +62,6 @@ $(function() {
 			},
 			error : function(data) {
                 $("#result").text("The HIT could not be generated.");
-                $("#hitid").text(data);
-
-				//alert('ajax failed' + data);
 			}
 		});
 	}
