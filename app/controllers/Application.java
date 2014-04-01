@@ -34,18 +34,20 @@ public class Application extends Controller
     {
         // Get the data from the form
         JsonNode hitRequest = request().body().asJson();
-        String url = hitRequest.get("url").textValue();
+        JsonNode questions = hitRequest.get("questions");
         int assignments = hitRequest.get("assignments").asInt();
         Double reward = hitRequest.get("reward").asDouble();
 
-        Logger.debug("Got request for URL: " + url + " Assignments: " + assignments);
+        //HashMap<String, String> hitMap = (HashMap<String, String>) turk.createHit(url, assignments, reward);
 
-        HashMap<String, String> hitMap = (HashMap<String, String>) turk.createHit(url, assignments, reward);
+        //hitMap.put("assignments", Integer.toString(assignments));
+        //hitMap.put("url", url);
 
-        hitMap.put("assignments", Integer.toString(assignments));
-        hitMap.put("url", url);
-
-        return ok(toJson(hitMap));
+        //return ok(toJson(hitMap));
+        ObjectNode response = Json.newObject();
+        response.put("id", "12345");
+        response.put("url", "www.google.com");
+        return ok(response);
     }
 
     /**
@@ -82,4 +84,5 @@ public class Application extends Controller
         
         return ok(response);
     }
+  
 }
