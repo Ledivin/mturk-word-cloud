@@ -2,36 +2,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <QuestionForm xmlns="http://mechanicalturk.amazonaws.com/AWSMechanicalTurkDataSchemas/2005-10-01/QuestionForm.xsd">
   <Overview>
-      <Text>Enter the first 3 words that pop in your head when you see this image: @url</Text>      
+      <Text>Answer the questions below about the following url: @url</Text>      
   </Overview>
   <Question>
-    <QuestionIdentifier>1</QuestionIdentifier>
+    <QuestionIdentifier>moreThanOneQuestion</QuestionIdentifier>
     <QuestionContent>
-      <Text>Word #1: </Text>
+      <Text>Does the original poster pose more than one question in the post?</Text>
     </QuestionContent>
     <AnswerSpecification>
-      <FreeTextAnswer>
-      </FreeTextAnswer>
+      <SelectionAnswer>
+        <StyleSuggestion>radiobutton</StyleSuggestion>
+        <Selections>
+          <Selection>
+            <SelectionIdentifier>moreThanOneQuestionYes</SelectionIdentifier>
+            <Text>Yes</Text>
+          </Selection>
+          <Selection>
+            <SelectionIdentifier>moreThanOneQuestionNo</SelectionIdentifier>
+            <Text>No</Text>
+          </Selection>
+        </Selections>
+      </SelectionAnswer>
     </AnswerSpecification>
   </Question>
   <Question>
-      <QuestionIdentifier>2</QuestionIdentifier>
-      <QuestionContent>
-        <Text>Word #2: </Text>
-      </QuestionContent>
-      <AnswerSpecification>
-        <FreeTextAnswer>
-        </FreeTextAnswer>
-      </AnswerSpecification>
-  </Question>
-  <Question>
-      <QuestionIdentifier>3</QuestionIdentifier>
-      <QuestionContent>
-        <Text>Word #3: </Text>
-      </QuestionContent>
-      <AnswerSpecification>
-        <FreeTextAnswer>
-        </FreeTextAnswer>
-      </AnswerSpecification>
+    <QuestionIdentifier>whyPblm</QuestionIdentifier>
+    <QuestionContent>
+      <Text>Does the original poster explain how or why the problem was initially encountered?</Text>
+    </QuestionContent>
+    <AnswerSpecification>
+      <SelectionAnswer>
+        <StyleSuggestion>radiobutton</StyleSuggestion>
+        <Selections>
+          <Selection>
+            <SelectionIdentifier>whyPblmYes</SelectionIdentifier>
+            <Text>Yes</Text>
+          </Selection>
+          <Selection>
+            <SelectionIdentifier>whyPblmNo</SelectionIdentifier>
+            <Text>No</Text>
+          </Selection>
+        </Selections>
+      </SelectionAnswer>
+    </AnswerSpecification>
   </Question>
 </QuestionForm>

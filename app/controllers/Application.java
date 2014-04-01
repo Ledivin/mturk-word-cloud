@@ -12,6 +12,7 @@ import play.mvc.Result;
 import services.MechanicalTurkService;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 /**
@@ -34,20 +35,28 @@ public class Application extends Controller
     {
         // Get the data from the form
         JsonNode hitRequest = request().body().asJson();
-        JsonNode questions = hitRequest.get("questions");
+        ArrayNode questions = (ArrayNode) hitRequest.get("questions");
         int assignments = hitRequest.get("assignments").asInt();
         Double reward = hitRequest.get("reward").asDouble();
 
-        //HashMap<String, String> hitMap = (HashMap<String, String>) turk.createHit(url, assignments, reward);
-
+        Map<String, String> hits = new HashMap<String, String>();
+        for(JsonNode question : questions) {
+        	String url = question.get("link").asText();
+            Logger.debug("Creating HIT for: " + url); 
+            String id = turk.createHit(url, assignments, reward);
+            Logger.debug("Created HIT: " + id);
+            hits.put(url, id);
+        }
+        
+        //ObjectNode response = Json.newObject();
+        
         //hitMap.put("assignments", Integer.toString(assignments));
         //hitMap.put("url", url);
 
-        //return ok(toJson(hitMap));
-        ObjectNode response = Json.newObject();
-        response.put("id", "12345");
-        response.put("url", "www.google.com");
-        return ok(response);
+        //
+        //response.put("ids", );
+        //response.put("url", "www.google.com");
+        return ok(toJson(hits));//toJson(hitMap));
     }
 
     /**

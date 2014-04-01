@@ -42,11 +42,12 @@ public class MechanicalTurkService
     /**
      * @param url URL for the turk to describe
      * @param assignments Number of assignments to run
+     * @param reward the reward
      * @return ID of new hit
      */
-    public Map<String, String> createHit(String url, int assignments, Double reward)
+    public String createHit(String url, int assignments, Double reward)
     {
-        Logger.debug("Creating hit: " + url + " Assignments: " + assignments);
+        Logger.debug("Creating hit");
 
         // Workaround for the office proxy
         System.setProperty("http.proxyHost", "");
@@ -54,21 +55,23 @@ public class MechanicalTurkService
 
         String question = views.html.question.render(url).body().trim();
 
-        Logger.debug("Creating question: " + question);
+        HIT hit = service.createHIT("Rate the Quality of this StackOverflow question", 
+        		"Answer questions about a StackOverflow question", 
+        		reward, 
+        		question, 
+        		assignments);
+        
+        //String hitURL = service.getWebsiteURL() + "/mturk/preview?groupId=" + hit.getHITTypeId();
+        //Logger.debug("View HIT here: " + hitURL);
 
-        HIT hit = service.createHIT("Describe an image in 3 words", "Describe an image in 3 words", reward, question, assignments);
-
-        String hitURL = service.getWebsiteURL() + "/mturk/preview?groupId=" + hit.getHITTypeId();
-        Logger.debug("View HIT here: " + hitURL);
-
-        Map<String, String> result = new HashMap<String, String>();
+        //Map<String, String> result = new HashMap<String, String>();
 
         // TODO: I'm not sure if this is the right ID to return to find the hit again. It doesn't seem to work. There is a different ID on the actual HIT page
         // that is used to retrieve the assignments. Could be .getHITGroupId() ??
-        result.put("hitId", hit.getHITId());
-        result.put("hitURL", hitURL);
+        //result.put("hitId", hit.getHITId());
+        //result.put("hitURL", hitURL);
 
-        return result;
+        return hit.getHITId();
     }
 
     /**

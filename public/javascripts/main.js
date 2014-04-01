@@ -12,24 +12,9 @@ $(function() {
         
         // (this is blocking)
         var questions = window.stackExchange.getQuestions(numQuestions);
-
-        create_hit(questions, numAssignments, reward);
+        console.log(questions);
         
-//        $.ajax({
-//            url: '/questions',
-//            type: 'post',
-//            dataType: 'json',
-//            contentType: 'application/json',
-//            data: questions,
-//            success : function(data) {
-//                console.log("success");
-//                console.log(data);
-//            },
-//            error: function(data) {
-//                console.log("error");
-//                console.log(data);
-//            }
-//        });        
+        create_hit(questions, numAssignments, reward);   
 	});
     
     var downloadQuestionsForHit = (function () {
@@ -55,11 +40,15 @@ $(function() {
 			}),
 			success : function(data) {
                 
-                $("#result").text("Your HIT with the following ID has been generated");
-                $("#hitid").text(data.id);
+                $("#result").text("The following HITs have been generated:");
+                
+                for(var key in data) {
+                	$("#hits").append("<tr><td>" + key + "</td><td>" + data[key] + "</td></tr>");
+                }
+                
                 $("#downloadjson").removeClass("hidden");
         
-                downloadQuestionsForHit(data.id, questions);
+                downloadQuestionsForHit("myhits", questions);
                 
 //				// TODO: Print URL where they can see the hits
 //				alert('success ' + JSON.stringify(data));
