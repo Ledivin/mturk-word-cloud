@@ -209,7 +209,7 @@
     </QuestionContent>
     <AnswerSpecification>
       <SelectionAnswer>
-        <StyleSuggestion>radiobutton</StyleSuggestion>
+        <StyleSuggestion>checkbox</StyleSuggestion>
         <Selections>
           <Selection>
             <SelectionIdentifier>knows</SelectionIdentifier>
@@ -219,6 +219,34 @@
             <SelectionIdentifier>not</SelectionIdentifier>
             <Text>The poster makes a general request for any type of help solving a problem that he/she does not fully understand.</Text>
           </Selection>
+          <Selection>
+		                <SelectionIdentifier>copypaste</SelectionIdentifier>
+		                <Text>The poster pasters a large chunk of code and asks what is wrong or for any advice</Text>
+		              </Selection>
+		              <Selection>
+		                <SelectionIdentifier>errormsg</SelectionIdentifier>
+		                <Text>The poster pastes an exception code/error message and asks on how to solve the problem?</Text>
+		              </Selection>
+		              <Selection>
+		  						  <SelectionIdentifier>codequestion</SelectionIdentifier>
+		  						  <Text>The poster  asks a question about a few lines of code.</Text>
+		              </Selection>
+		              <Selection>
+		  						  <SelectionIdentifier>tips</SelectionIdentifier>
+		  						  <Text>The poster  asks for general tips/best-practices.</Text>
+		              </Selection>
+		              <Selection>
+		  						  <SelectionIdentifier>questionbackground</SelectionIdentifier>
+		  						  <Text>The poster  tells a story about how they ran into the issue.</Text>
+		              </Selection>
+		              <Selection>
+		  						  <SelectionIdentifier>directquestion</SelectionIdentifier>
+		  						  <Text>The poster  asks a clear, direct question.</Text>
+		              </Selection>
+		              <Selection>
+		  						  <SelectionIdentifier>problemstory</SelectionIdentifier>
+		  						  <Text>The poster  explains what they have already done.</Text>
+            </Selection>
         </Selections>
       </SelectionAnswer>
     </AnswerSpecification>
@@ -231,47 +259,6 @@
       <AnswerSpecification>
         <FreeTextAnswer>
         </FreeTextAnswer>
-      </AnswerSpecification>
-  </Question>
-  <Question>
-      <QuestionIdentifier>classification</QuestionIdentifier>
-      <QuestionContent>
-        <Text>Which of these classifications apply to the original post?</Text>
-      </QuestionContent>
-      <AnswerSpecification>
-        <SelectionAnswer>
-          <StyleSuggestion>checkbox</StyleSuggestion>
-          <Selections>
-            <Selection>
-              <SelectionIdentifier>copypaste</SelectionIdentifier>
-              <Text>User posts large chunk of code and asks what is wrong or for any advice</Text>
-            </Selection>
-            <Selection>
-              <SelectionIdentifier>errormsg</SelectionIdentifier>
-              <Text>User posts an exception code/error message, (if applicable)</Text>
-            </Selection>
-            <Selection>
-						  <SelectionIdentifier>codequestion</SelectionIdentifier>
-						  <Text>User asks a question about a few lines of code.</Text>
-            </Selection>
-            <Selection>
-						  <SelectionIdentifier>tips</SelectionIdentifier>
-						  <Text>User asks for general tips/best-practices.</Text>
-            </Selection>
-            <Selection>
-						  <SelectionIdentifier>questionbackground</SelectionIdentifier>
-						  <Text>User tells a story about how they ran into the issue.</Text>
-            </Selection>
-            <Selection>
-						  <SelectionIdentifier>directquestion</SelectionIdentifier>
-						  <Text>User asks a clear, direct question.</Text>
-            </Selection>
-            <Selection>
-						  <SelectionIdentifier>problemstory</SelectionIdentifier>
-						  <Text>User explains what they have already done.</Text>
-            </Selection>
-          </Selections>
-        </SelectionAnswer>
       </AnswerSpecification>
   </Question>
 </QuestionForm>
