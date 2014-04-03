@@ -8,7 +8,7 @@
 	//var filterUrl = "/2.2/filters/create?unsafe=false";
 	var questionsUrl = "/2.2/questions?page=1&pagesize=$NUM_QUESTIONS&fromdate=$FROMDATE&todate=$TODATE&site=stackoverflow&filter=!)58T.dxlk3e_DehDMaJ)WH8uYMZ1"
 
-	var defaultDate = 1389744000; //2014-01-15... randomly chosen
+	var defaultDate = 1373760000; //Sept 14 2013... randomly chosen
 	var defaultQuestionId = 22737086; //randomly chosen
 
 	var ajax = function(url) {

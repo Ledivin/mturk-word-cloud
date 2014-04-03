@@ -2,91 +2,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <QuestionForm xmlns="http://mechanicalturk.amazonaws.com/AWSMechanicalTurkDataSchemas/2005-10-01/QuestionForm.xsd">
   <Overview>
-  	<Text>General demographic questions.</Text>
-  </Overview>
-  <Question>
-      <QuestionIdentifier>technicalbackground</QuestionIdentifier>
-      <QuestionContent>
-        <Text>Would you consider yourself to be a programmer?</Text>
-      </QuestionContent>
-      <AnswerSpecification>
-        <SelectionAnswer>
-          <StyleSuggestion>radiobutton</StyleSuggestion>
-          <Selections>
-            <Selection>
-              <SelectionIdentifier>Yes</SelectionIdentifier>
-              <Text>Yes</Text>
-            </Selection>
-            <Selection>
-              <SelectionIdentifier>No</SelectionIdentifier>
-              <Text>No</Text>
-            </Selection>
-          </Selections>
-        </SelectionAnswer>
-      </AnswerSpecification>
-  </Question>
-  <Question>
-        <QuestionIdentifier>useSO</QuestionIdentifier>
-        <QuestionContent>
-          <Text>Have you used StackOverflow.com before and/or do you know what StackOverflow.com is?</Text>
-        </QuestionContent>
-        <AnswerSpecification>
-          <SelectionAnswer>
-            <StyleSuggestion>radiobutton</StyleSuggestion>
-            <Selections>
-              <Selection>
-                <SelectionIdentifier>Yes</SelectionIdentifier>
-                <Text>Yes</Text>
-              </Selection>
-              <Selection>
-                <SelectionIdentifier>No</SelectionIdentifier>
-                <Text>No</Text>
-              </Selection>
-            </Selections>
-          </SelectionAnswer>
-        </AnswerSpecification>
-  </Question>
-  <Question>
-        <QuestionIdentifier>SOUse</QuestionIdentifier>
-        <QuestionContent>
-          <Text>What do you primarily use StackOverflow for?</Text>
-        </QuestionContent>
-        <AnswerSpecification>
-          <SelectionAnswer>
-            <StyleSuggestion>checkbox</StyleSuggestion>
-            <Selections>
-              <Selection>
-                <SelectionIdentifier>search</SelectionIdentifier>
-                <Text>Search for questions with problems I'm running into.</Text>
-              </Selection>
-              <Selection>
-                <SelectionIdentifier>answer</SelectionIdentifier>
-                <Text>Respond to questions and help the community.</Text>
-              </Selection>
-              <Selection>
-  						  <SelectionIdentifier>question</SelectionIdentifier>
-  						  <Text>Ask questions to problems that I encounter on a regular basis.</Text>
-              </Selection>
-              <Selection>
-  						  <SelectionIdentifier>learn</SelectionIdentifier>
-  						  <Text>Learn something new.</Text>
-              </Selection>
-            </Selections>
-          </SelectionAnswer>
-        </AnswerSpecification>
-  </Question>
-  <Question>
-      <QuestionIdentifier>SOlikesdislikes</QuestionIdentifier>
-      <QuestionContent>
-        <Text>What are some of the things you like or dislike about StackOverflow?</Text>
-      </QuestionContent>
-      <AnswerSpecification>
-        <FreeTextAnswer>
-        </FreeTextAnswer>
-      </AnswerSpecification>
-  </Question>
-  <Overview>
-      <Text>Answer the questions below about the following url: @url</Text>
+    <Title>Rate the Quality of this StackOverflow Question</Title>
+    <Text>Thank you for helping us out with our subjective analysis of StackOverflow.com questions.</Text>
+    <Text>Please visit become familiar with the question at the following URL before answering the questions below.</Text>
+    <Text>@url</Text>
   </Overview>
   <Question>
     <QuestionIdentifier>author</QuestionIdentifier>
@@ -95,13 +14,14 @@
     </QuestionContent>
     <AnswerSpecification>
       <FreeTextAnswer>
+      	<NumberOfLinesSuggestion>1</NumberOfLinesSuggestion>
       </FreeTextAnswer>
     </AnswerSpecification>
   </Question>
   <Question>
     <QuestionIdentifier>moreThanOneQuestion</QuestionIdentifier>
     <QuestionContent>
-      <Text>Does the original poster pose more than one question in the post?</Text>
+      <Text>Does the original poster ask more than one question in the post?</Text>
     </QuestionContent>
     <AnswerSpecification>
       <SelectionAnswer>
@@ -203,62 +123,140 @@
     </AnswerSpecification>
   </Question>
   <Question>
-    <QuestionIdentifier>askerKnowledge</QuestionIdentifier>
+    <QuestionIdentifier>typeOfQuestion</QuestionIdentifier>
     <QuestionContent>
-      <Text>Which phrase best applies to the original post?</Text>
+      <Text>Which of the following describe the question:</Text>
     </QuestionContent>
     <AnswerSpecification>
       <SelectionAnswer>
         <StyleSuggestion>checkbox</StyleSuggestion>
         <Selections>
           <Selection>
+             <SelectionIdentifier>copypaste</SelectionIdentifier>
+             <Text>A large chunk of code; asks what is wrong or for any advice</Text>
+           </Selection>
+           <Selection>
+             <SelectionIdentifier>errormsg</SelectionIdentifier>
+             <Text>An exception code/error message; asks how to solve the problem</Text>
+           </Selection>
+           <Selection>
+		     <SelectionIdentifier>codequestion</SelectionIdentifier>
+			 <Text>A question about a few lines of code</Text>
+           </Selection>
+           <Selection>
+			 <SelectionIdentifier>tips</SelectionIdentifier>
+			 <Text>General tips/best-practices</Text>
+           </Selection>
+        </Selections>
+      </SelectionAnswer>
+    </AnswerSpecification>
+  </Question>
+  <Question>
+    <QuestionIdentifier>askerKnowledge</QuestionIdentifier>
+    <QuestionContent>
+      <Text>Which of the following describe the question:</Text>
+    </QuestionContent>
+    <AnswerSpecification>
+      <SelectionAnswer>
+        <StyleSuggestion>checkbox</StyleSuggestion>
+        <Selections>
+           <Selection>
+			 <SelectionIdentifier>questionbackground</SelectionIdentifier>
+			 <Text>The poster asks a clear, direct question.</Text>
+           </Selection>
+          <Selection>
             <SelectionIdentifier>knows</SelectionIdentifier>
-            <Text>The poster knows what question he/she needs to ask in order to get the information necessary to solve the problem and makes a specific request for that information.</Text>
+            <Text>The poster knows what question he/she needs to ask in order to get the information necessary to solve the problem.</Text>
           </Selection>
           <Selection>
             <SelectionIdentifier>not</SelectionIdentifier>
             <Text>The poster makes a general request for any type of help solving a problem that he/she does not fully understand.</Text>
           </Selection>
           <Selection>
-		                <SelectionIdentifier>copypaste</SelectionIdentifier>
-		                <Text>The poster pasters a large chunk of code and asks what is wrong or for any advice</Text>
-		              </Selection>
-		              <Selection>
-		                <SelectionIdentifier>errormsg</SelectionIdentifier>
-		                <Text>The poster pastes an exception code/error message and asks on how to solve the problem?</Text>
-		              </Selection>
-		              <Selection>
-		  						  <SelectionIdentifier>codequestion</SelectionIdentifier>
-		  						  <Text>The poster  asks a question about a few lines of code.</Text>
-		              </Selection>
-		              <Selection>
-		  						  <SelectionIdentifier>tips</SelectionIdentifier>
-		  						  <Text>The poster  asks for general tips/best-practices.</Text>
-		              </Selection>
-		              <Selection>
-		  						  <SelectionIdentifier>questionbackground</SelectionIdentifier>
-		  						  <Text>The poster  tells a story about how they ran into the issue.</Text>
-		              </Selection>
-		              <Selection>
-		  						  <SelectionIdentifier>directquestion</SelectionIdentifier>
-		  						  <Text>The poster  asks a clear, direct question.</Text>
-		              </Selection>
-		              <Selection>
-		  						  <SelectionIdentifier>problemstory</SelectionIdentifier>
-		  						  <Text>The poster  explains what they have already done.</Text>
-            </Selection>
+		    <SelectionIdentifier>questionbackground</SelectionIdentifier>
+			<Text>The poster tells a story about how they ran into the issue.</Text>
+          </Selection>
+          <Selection>
+			<SelectionIdentifier>problemstory</SelectionIdentifier>
+			<Text>The poster explains what they have already done.</Text>
+          </Selection>
         </Selections>
       </SelectionAnswer>
     </AnswerSpecification>
   </Question>
   <Question>
-      <QuestionIdentifier>strengthweakness</QuestionIdentifier>
+      <QuestionIdentifier>technicalbackground</QuestionIdentifier>
       <QuestionContent>
-        <Text>What are strengths/weaknesses of the question?</Text>
+        <Text>Would you consider yourself to be a programmer?</Text>
       </QuestionContent>
       <AnswerSpecification>
-        <FreeTextAnswer>
-        </FreeTextAnswer>
+        <SelectionAnswer>
+          <StyleSuggestion>radiobutton</StyleSuggestion>
+          <Selections>
+            <Selection>
+              <SelectionIdentifier>Yes</SelectionIdentifier>
+              <Text>Yes</Text>
+            </Selection>
+            <Selection>
+              <SelectionIdentifier>No</SelectionIdentifier>
+              <Text>No</Text>
+            </Selection>
+          </Selections>
+        </SelectionAnswer>
       </AnswerSpecification>
+  </Question>
+  <Question>
+        <QuestionIdentifier>useSO</QuestionIdentifier>
+        <QuestionContent>
+          <Text>Have you used StackOverflow.com before and/or do you know what StackOverflow.com is?</Text>
+        </QuestionContent>
+        <AnswerSpecification>
+          <SelectionAnswer>
+            <StyleSuggestion>radiobutton</StyleSuggestion>
+            <Selections>
+              <Selection>
+                <SelectionIdentifier>Yes</SelectionIdentifier>
+                <Text>Yes</Text>
+              </Selection>
+              <Selection>
+                <SelectionIdentifier>No</SelectionIdentifier>
+                <Text>No</Text>
+              </Selection>
+            </Selections>
+          </SelectionAnswer>
+        </AnswerSpecification>
+  </Question>
+  <Question>
+        <QuestionIdentifier>SOUse</QuestionIdentifier>
+        <QuestionContent>
+          <Text>What do you primarily use StackOverflow for?</Text>
+        </QuestionContent>
+        <AnswerSpecification>
+          <SelectionAnswer>
+            <StyleSuggestion>checkbox</StyleSuggestion>
+            <Selections>
+              <Selection>
+                <SelectionIdentifier>search</SelectionIdentifier>
+                <Text>Search for questions with problems I'm running into.</Text>
+              </Selection>
+              <Selection>
+                <SelectionIdentifier>answer</SelectionIdentifier>
+                <Text>Respond to questions and help the community.</Text>
+              </Selection>
+              <Selection>
+  						  <SelectionIdentifier>question</SelectionIdentifier>
+  						  <Text>Ask questions to problems that I encounter on a regular basis.</Text>
+              </Selection>
+              <Selection>
+  						  <SelectionIdentifier>learn</SelectionIdentifier>
+  						  <Text>Learn something new.</Text>
+              </Selection>
+              <Selection>
+  						  <SelectionIdentifier>na</SelectionIdentifier>
+  						  <Text>I don't use StackOverflow.</Text>
+              </Selection>
+            </Selections>
+          </SelectionAnswer>
+        </AnswerSpecification>
   </Question>
 </QuestionForm>
