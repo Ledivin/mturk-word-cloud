@@ -5,6 +5,10 @@ $(function() {
 	$('#stack_overflow_form').submit(function(e) {
 		e.preventDefault();
 		// preventing default click action
+		
+		$("#result").empty();
+		$("#hits").empty();
+		$("#downloadjson").addClass("hidden");
         
         var numQuestions = $("#questions").val();
         var numAssignments = $("#assignments").val();
@@ -14,7 +18,10 @@ $(function() {
         var questions = window.stackExchange.getQuestions(numQuestions);
         console.log(questions);
         
-        create_hit(questions, numAssignments, reward);   
+        create_hit(questions, numAssignments, reward); 
+
+        // download ALL questions data in 1 file
+        downloadQuestionsForHit("myhits", questions);
 	});
     
     var downloadQuestionsForHit = (function () {
@@ -28,6 +35,7 @@ $(function() {
     }());
 
 	var create_hit = function(questions, assignments, reward) {
+		
 		$.ajax({
 			url: '/api/hit',
 			type: 'post',
@@ -42,27 +50,32 @@ $(function() {
                 				
                 $("#result").text("The following HITs have been generated:");
                 
+                $("#hits").append("<tr><th>URL</th><th>HIT ID</th></tr>");
                 for(var key in data) {
                 	$("#hits").append("<tr><td>" + key + "</td><td>" + data[key] + "</td></tr>");
                 }
                 
                 $("#downloadjson").removeClass("hidden");
-        
-                downloadQuestionsForHit("myhits", questions);
-                
-//				// TODO: Print URL where they can see the hits
-//				alert('success ' + JSON.stringify(data));
-//				console.log('Success: ' + JSON.stringify(data));
-//
-//				// Set the value of the HIT input box to this data.
-//				$('#id').val(data.hitId);
 
-				// Open the new HIT in a new window
-				//window.open(data.url, '_blank');
 			},
 			error : function(data) {
-                $("#result").text("The HIT could not be generated.");
+				
+				if(data.responseText === "Too much data!") {
+						
+					var halfSize = questions.length / 2;
+					var questionsA = questions.slice(0, halfSize);
+					var questionsB = questions.slice(halfSize);
+					
+					create_hit(questionsA, assignments, reward);
+					create_hit(questionsB, assignments, reward);
+					
+				}
+				
+				else {
+					$("#result").text("The HIT could not be generated.");
+				}
 			}
 		});
+		
 	}
 });

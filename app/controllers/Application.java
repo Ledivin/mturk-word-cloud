@@ -33,6 +33,10 @@ public class Application extends Controller
      */
     public static Result createHit()
     {
+    	if(request().body().isMaxSizeExceeded()) {
+    		return badRequest("Too much data!");
+    	}
+    	
         // Get the data from the form
         JsonNode hitRequest = request().body().asJson();
         ArrayNode questions = (ArrayNode) hitRequest.get("questions");
@@ -47,16 +51,8 @@ public class Application extends Controller
             Logger.debug("Created HIT: " + id);
             hits.put(url, id);
         }
-        
-        //ObjectNode response = Json.newObject();
-        
-        //hitMap.put("assignments", Integer.toString(assignments));
-        //hitMap.put("url", url);
 
-        //
-        //response.put("ids", );
-        //response.put("url", "www.google.com");
-        return ok(toJson(hits));//toJson(hitMap));
+        return ok(toJson(hits));
     }
 
     /**
