@@ -23,7 +23,38 @@ $(function() {
         // download ALL questions data in 1 file
         downloadQuestionsForHit("myhits", questions);
 	});
+	
+	$("#getHitOptions").click(function() {
+		$.get("api/hits")
+			.done(function( data ) {
+				
+				$("#getHitOptions").addClass("hidden");
+
+				for(var num in data) {
+					var hit = data[num];
+					var checkboxMarkup = '<input type="checkbox" name="hitIds" value="' + hit.hitId + '" data-url="' + hit.url + '">' + " " + hit.title + " " + hit.time + '<br>';
+					$("#hitOptions").append(checkboxMarkup);
+				}
+				
+				$('#results_form').removeClass("hidden");
+				
+			});
+	});
     
+	$('#results_form').submit(function(e) {
+		e.preventDefault();
+		
+		var hits = [];
+		$("input:checkbox[name=hitIds]:checked").each(function() {
+			hits.push({
+				"id" : $(this).val(),
+				"url" : $(this).attr("data-url")
+			});
+		});
+
+		getResultsForHits(hits);
+	});
+	
     var downloadQuestionsForHit = (function () {
         return function (hitid, questions) {
             var json = JSON.stringify(questions),
@@ -78,4 +109,38 @@ $(function() {
 		});
 		
 	}
+	
+	var downloadHitResults = function (data) {
+        var json = JSON.stringify(data),
+            blob = new Blob([json], {type: "octet/stream"}),
+            url = window.URL.createObjectURL(blob);
+        $("#download").attr("href", url);
+        $("#download").attr("download", "results.json");
+        $("#download").removeClass("hidden");
+    };
+	
+	
+	var getResultsForHits = function(hits) {
+		
+		$.ajax({
+			url: '/api/results',
+			type: 'post',
+			dataType: 'json',
+			contentType: 'application/json',
+			data: JSON.stringify({
+				hits: hits
+			}),
+			success : function(data) {
+				downloadHitResults(data);
+			},
+			error : function(data) {
+				
+				console.log("error");
+				console.log(data);
+			}
+		});
+		
+	}
+	
+	
 });

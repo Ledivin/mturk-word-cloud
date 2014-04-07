@@ -55,39 +55,32 @@ public class Application extends Controller
         return ok(toJson(hits));
     }
 
-    /**
-     * Get all words from completed hits. Useful when creating a word cloud. The id of the HIT should be in the query parameters of the request.
-     *
-     * @return Words for a hitId
-     */
-    public static Result getWords(String hitId)
-    {
-        Logger.debug("Got request for words: " + hitId);
+    public static Result getAllHits() {
+    	
+    	return ok(turk.getAllHits());
+    }
+    
 
-        Map<String, Integer> wordCounts = turk.getWordsFromCompletedAssignments(hitId);
-
-        Integer maxCount = 0;
-        String maxWord = null;
-        for(Map.Entry<String, Integer> word : wordCounts.entrySet()) {
-        	if(word.getValue() > maxCount) {
-        		maxCount = word.getValue();
-        		maxWord = word.getKey();
-        	}
-        } 
+    public static Result getResults()
+    {	
+    	JsonNode hitRequest = request().body().asJson();
+        ArrayNode hits = (ArrayNode) hitRequest.get("hits");
         
-        Logger.debug("Total number of accepted words: "+wordCounts.size());
-        Logger.debug("Highest frequency: "+maxCount+ " "+maxWord);
-
-        Logger.debug("All words and their frequencies:");
-        for(Map.Entry<String, Integer> word : wordCounts.entrySet()) {
-        	Logger.debug("    " + word.getKey() + " - " + word.getValue());
+        ObjectNode results = Json.newObject();
+        
+        for(int i=0; i<hits.size(); i++) {
+        	
+        	JsonNode hit = hits.get(i);
+        	
+        	String hitId = hit.get("id").asText();
+        	String url = hit.get("url").asText();
+   
+        	ArrayNode responses = turk.getHitResponses(hitId);
+        	
+        	results.put(url, responses);        	
         }
         
-        ObjectNode response = Json.newObject();
-        response.put("wordArray", toJson(wordCounts));
-        response.put("maxCount", maxCount);
-        
-        return ok(response);
+        return ok(results);
     }
   
 }

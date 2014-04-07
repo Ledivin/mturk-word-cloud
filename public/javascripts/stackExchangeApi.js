@@ -8,7 +8,7 @@
 	var questionsUrl = "/2.2/questions?page=$PAGE&pagesize=$NUM_QUESTIONS&todate=$TODATE&site=stackoverflow&filter=!)58T.dxlk3e_DehDMaJ)WH8uYMZ1"
 
 	var latestDate = 1391489755; //Feb 4 2014... randomly chosen 2 months ago (anything before that)
-	var currentPage = 0;
+	var currentPage = 3;
 	
 	var ajax = function(url) {
 		var ret = null;

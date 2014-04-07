@@ -10,11 +10,14 @@
 
 package services;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import play.Logger;
+import play.libs.Json;
 
 import com.amazonaws.mturk.dataschema.QuestionFormAnswers;
 import com.amazonaws.mturk.dataschema.QuestionFormAnswersType;
@@ -23,132 +26,117 @@ import com.amazonaws.mturk.requester.AssignmentStatus;
 import com.amazonaws.mturk.requester.HIT;
 import com.amazonaws.mturk.service.axis.RequesterService;
 import com.amazonaws.mturk.util.PropertiesClientConfig;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 /**
  * This class acts as an interface to Mechanical Turk
  */
-public class MechanicalTurkService
-{
-    private RequesterService service;
+public class MechanicalTurkService {
+	private RequesterService service;
 
-    /**
-     * Initialize the Mechanical Turk service
-     */
-    public MechanicalTurkService()
-    {
-        service = new RequesterService(new PropertiesClientConfig("conf/mturk.properties"));
-    }
+	/**
+	 * Initialize the Mechanical Turk service
+	 */
+	public MechanicalTurkService() {
+		service = new RequesterService(new PropertiesClientConfig(
+				"conf/mturk.properties"));
+	}
 
-    /**
-     * @param url URL for the turk to describe
-     * @param assignments Number of assignments to run
-     * @param reward the reward
-     * @return ID of new hit
-     */
-    public String createHit(String url, int assignments, Double reward)
-    {
-        Logger.debug("Creating hit");
+	public String createHit(String url, int assignments, Double reward) {
+		Logger.debug("Creating hit");
 
-        // Workaround for the office proxy
-        System.setProperty("http.proxyHost", "");
-        System.setProperty("http.proxyPort", "");
+		// Workaround for the office proxy
+		System.setProperty("http.proxyHost", "");
+		System.setProperty("http.proxyPort", "");
 
-        String question = views.html.question.render(url).body().trim();
+		String question = views.html.question.render(url).body().trim();
 
-        HIT hit = service.createHIT("Rate the Quality of this StackOverflow question", 
-        		"Answer questions about a StackOverflow question", 
-        		reward, 
-        		question, 
-        		assignments);
-        
-        //String hitURL = service.getWebsiteURL() + "/mturk/preview?groupId=" + hit.getHITTypeId();
-        //Logger.debug("View HIT here: " + hitURL);
+		HIT hit = service.createHIT(
+				"Rate the Quality of this StackOverflow question",
+				"Answer questions about a StackOverflow question", reward,
+				question, assignments);
 
-        //Map<String, String> result = new HashMap<String, String>();
+		return hit.getHITId();
+	}
 
-        // TODO: I'm not sure if this is the right ID to return to find the hit again. It doesn't seem to work. There is a different ID on the actual HIT page
-        // that is used to retrieve the assignments. Could be .getHITGroupId() ??
-        //result.put("hitId", hit.getHITId());
-        //result.put("hitURL", hitURL);
+	public JsonNode getAllHits() {
 
-        return hit.getHITId();
-    }
+		ArrayNode allHits = Json.newObject().arrayNode();
 
-    /**
-     * Ex.
-     * {"lovely":15, "happy":2, "nice": 3, ...}
-     *
-     * @param hitId
-     * @return Frequency map of words and their counts
-     */
-    public Map<String, Integer> getWordsFromCompletedAssignments(String hitId)
-    {
-        Assignment[] assignments = service.getAllAssignmentsForHIT(hitId);
-        Logger.debug("Found " + assignments.length + " assignments.");
-        Map<String, Integer> wordCount = parseAssignmentsForWords(assignments);
-        return wordCount;
-    }
+		HIT[] hits = service.searchAllHITs();
+		for (HIT hit : hits) {
 
-    /**
-     * Parses a list of assignments an pulls out the descriptive word answers.
-     *
-     * @param assignments
-     * @return A map of words and their counts
-     */
-    private Map<String, Integer> parseAssignmentsForWords(Assignment[] assignments)
-    {
-        Map<String, Integer> wordCounts = new HashMap<String, Integer>();
+			ObjectNode myHit = Json.newObject();
+			myHit.put("hitId", hit.getHITId());
+			myHit.put("title", hit.getTitle());
+			myHit.put("reward", hit.getReward().getFormattedPrice());
+			DateFormat dateFormat = new SimpleDateFormat("MM/dd HH:mm:ss");
+			myHit.put("time",
+					dateFormat.format(hit.getCreationTime().getTime()));
+			myHit.put("url", parseUrlFromQuestion(hit.getQuestion()));
 
-        for (Assignment assignment : assignments)
-        {
-            if ( isSubmittedOrApproved(assignment) )
-            {
-                String answerXML = assignment.getAnswer();
+			allHits.add(myHit);
+		}
 
-                Logger.debug("Answer as XML: " + answerXML);
+		return allHits;
+	}
 
-                QuestionFormAnswers questionFormAnswers = RequesterService.parseAnswers(answerXML);
-                questionFormAnswers.getAnswer();
+	private String parseUrlFromQuestion(String question) {
+		String questionSubstr = "";
+		int start = question.indexOf("<Text>http://stackoverflow");
+		if(start != -1) {
+			start += 6;
+			questionSubstr = question.substring(start);
+			int end = questionSubstr.indexOf("</Text>");
+			if(end != -1) {
+				questionSubstr = questionSubstr.substring(0, end);
+			}
+		}
+		return questionSubstr;
+	}
 
-                @SuppressWarnings("unchecked")
-                List<QuestionFormAnswersType.AnswerType> answers 
-                	= (List<QuestionFormAnswersType.AnswerType>) questionFormAnswers.getAnswer();
-                
-                for (QuestionFormAnswersType.AnswerType answer : answers)
-                {
-                    String assignmentId = assignment.getAssignmentId();
-                    String word = RequesterService.getAnswerValue(assignmentId, answer);
+	public ArrayNode getHitResponses(String hitId) {
+		
+		Assignment[] assignments = service.getAllAssignmentsForHIT(hitId);
+		Logger.debug("Found " + assignments.length + " assignments.");
+		
+		ArrayNode responses = Json.newObject().arrayNode(); 
+		
+		for (Assignment assignment : assignments) {
+			if (isSubmittedOrApproved(assignment)) {
+				String answerXML = assignment.getAnswer();
 
-                    // Make word lowercase & trim off spaces
-                    word = word.toLowerCase();
-                    word = word.trim();
-                    
-                    // validate words
-                    WordValidationService validator = new WordValidationService();
-                    
-                    if(wordCounts.containsKey(word)) {
-                    	// Increment word count
-	                    int count = wordCounts.containsKey(word) ? wordCounts.get(word) : 0;
-	                    wordCounts.put(word, count + 1);
-                    }
-                    else {
-                    	if(validator.isValid(word)) {
-                    		// Increment word count
-    	                    int count = wordCounts.containsKey(word) ? wordCounts.get(word) : 0;
-    	                    wordCounts.put(word, count + 1);
-                    	}
-                    }
-                }
-            }
-        }
+				QuestionFormAnswers questionFormAnswers = RequesterService
+						.parseAnswers(answerXML);
+				questionFormAnswers.getAnswer();
 
-        return wordCounts;
-    }
+				@SuppressWarnings("unchecked")
+				List<QuestionFormAnswersType.AnswerType> answers = (List<QuestionFormAnswersType.AnswerType>) questionFormAnswers
+						.getAnswer();
+				
+				ObjectNode response = Json.newObject();
 
-    private boolean isSubmittedOrApproved(Assignment assignment)
-    {
-        return assignment.getAssignmentStatus() == AssignmentStatus.Submitted
-        		|| assignment.getAssignmentStatus() == AssignmentStatus.Approved;
-    }
+				for (QuestionFormAnswersType.AnswerType answerType : answers) {
+					String assignmentId = assignment.getAssignmentId();
+					String answer = RequesterService.getAnswerValue(assignmentId,
+							answerType);
+
+					response.put(answerType.getQuestionIdentifier(), answer);
+				}
+				
+				responses.add(response);
+			}
+		}
+
+		return responses;
+	}
+
+	private boolean isSubmittedOrApproved(Assignment assignment) {
+		return assignment.getAssignmentStatus() == AssignmentStatus.Submitted
+				|| assignment.getAssignmentStatus() == AssignmentStatus.Approved;
+	}
+
 
 }

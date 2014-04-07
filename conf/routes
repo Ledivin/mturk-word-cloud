@@ -6,8 +6,9 @@
 GET     /                           controllers.Assets.at(path="/public", file="index.html")
 
 # Routes to handle HIT interaction
+GET		/api/hits					controllers.Application.getAllHits()
 POST	/api/hit					controllers.Application.createHit()
-GET 	/api/words/:id				controllers.Application.getWords(id: String)
+POST 	/api/results				controllers.Application.getResults()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
