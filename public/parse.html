@@ -1,0 +1,119 @@
+<html>
+<head>
+
+<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+  <title>Parse</title>
+
+<script type="text/javascript">
+window.foo = function(){
+var questionMap = {
+	author: 'Who posted the question?',
+	moreThanOneQuestion: 'Does the original poster ask more than one question in the post?',
+	whyProblem: 'Does the original poster explain how or why the problem was initially encountered?',
+	previousAttempts: 'Does the original poster discuss any previous attempts to solve the problem?',
+	tone: 'On a scale of 1-7, please rate the overall tone of the original post.',
+	typeOfQuestion: 'Which of the following describe the question:',
+	copypaste: 'A large chunk of code; asks what is wrong or for any advice',
+	errormsg: 'An exception code/error message; asks how to solve the problem',
+	codequestion: 'A question about a few lines of code',
+	tips: 'General tips/best-practices',
+	askerKnowledge: 'Which of the following describe the question:',
+	clearquestion: 'The poster asks a clear, direct question.',
+	knows: 'The poster knows what question he/she needs to ask in order to get the information necessary to solve the problem.',
+	not: 'The poster makes a general request for any type of help solving a problem that he/she does not fully understand.',
+	questionbackground: 'The poster tells a story about how they ran into the issue.',
+	problemstory: 'The poster explains what they have already done.',
+	technicalbackground: 'Would you consider yourself to be a programmer?',
+	useSO: 'Have you used StackOverflow.com before and/or do you know what StackOverflow.com is?'
+};
+
+
+var data;
+
+try {
+data = JSON.parse(document.getElementById('data').value);
+} catch (e) {}
+
+data = data || {"http://stackoverflow.com/questions/10699265/how-can-i-efficiently-select-a-standard-library-container-in-c11":[{"author":"blakbat","moreThanOneQuestion":"No","whyProblem":"Yes","previousAttempts":"No","tone":"5","typeOfQuestion":"tips","askerKnowledge":"clearquestion|knows|not","technicalbackground":"No","useSO":"No","SOUse":"na"},{"author":"Blakbat","moreThanOneQuestion":"No","whyProblem":"No","previousAttempts":"No","tone":"5","typeOfQuestion":"codequestion|tips","askerKnowledge":"clearquestion","technicalbackground":"Yes","useSO":"Yes","SOUse":"search|question|learn"}],"http://stackoverflow.com/questions/14214902/nhibernate-mappingexception-could-not-compile-the-mapping-document":[{"author":"Daniel Hilgarth","moreThanOneQuestion":"No","whyProblem":"No","previousAttempts":"No","tone":"1","typeOfQuestion":"copypaste","askerKnowledge":"not","technicalbackground":"No","useSO":"No","SOUse":"na"},{"author":"Overflow012","moreThanOneQuestion":"Yes","whyProblem":"Yes","previousAttempts":"Yes","tone":"6","typeOfQuestion":"copypaste|errormsg","askerKnowledge":"clearquestion|knows|not|questionbackground|problemstory","technicalbackground":"No","useSO":"No","SOUse":"na"}],"http://stackoverflow.com/questions/15210445/what-is-the-datatype-of-facebook-userid":[{"author":"pronox","moreThanOneQuestion":"Yes","whyProblem":"No","previousAttempts":"No","tone":"5","typeOfQuestion":"tips","askerKnowledge":"clearquestion","technicalbackground":"No","useSO":"No","SOUse":"learn"},{"author":"Pronox","moreThanOneQuestion":"Yes","whyProblem":"Yes","previousAttempts":"No","tone":"4","typeOfQuestion":"tips","askerKnowledge":"clearquestion","technicalbackground":"Yes","useSO":"Yes","SOUse":"search|answer|learn"}],"http://stackoverflow.com/questions/19136791/oauth2-resource-owner-credentials-flow-how-to-be-sure-the-given-client-id-is-t":[{"author":"rico","moreThanOneQuestion":"Yes","whyProblem":"Yes","previousAttempts":"No","tone":"4","typeOfQuestion":"tips","askerKnowledge":"clearquestion","technicalbackground":"No","useSO":"No","SOUse":"na"},{"author":"rico","moreThanOneQuestion":"Yes","whyProblem":"Yes","previousAttempts":"No","tone":"4","typeOfQuestion":"tips","askerKnowledge":"clearquestion|knows|not|questionbackground|problemstory","technicalbackground":"No","useSO":"No","SOUse":"na"}],"http://stackoverflow.com/questions/2455225/how-do-i-move-focus-to-next-input-with-jquery":[{"author":"Matt","moreThanOneQuestion":"No","whyProblem":"Yes","previousAttempts":"Yes","tone":"5","typeOfQuestion":"errormsg|codequestion|tips","askerKnowledge":"knows","technicalbackground":"Yes","useSO":"Yes","SOUse":"search|question|learn"},{"author":"Matt","moreThanOneQuestion":"Yes","whyProblem":"Yes","previousAttempts":"No","tone":"7","typeOfQuestion":"errormsg","askerKnowledge":"clearquestion|knows","technicalbackground":"Yes","useSO":"Yes","SOUse":"search|answer"}],"http://stackoverflow.com/questions/14542319/the-eclipse-executable-launcher-was-unable-to-locate-its-companion-shared-librar":[{"author":"Caden Ratcliff","moreThanOneQuestion":"No","whyProblem":"Yes","previousAttempts":"No","tone":"4","typeOfQuestion":"codequestion","askerKnowledge":"knows","technicalbackground":"No","useSO":"No","SOUse":"search"},{"author":"Caden Ratcliff","moreThanOneQuestion":"No","whyProblem":"Yes","previousAttempts":"Yes","tone":"5","typeOfQuestion":"errormsg|tips","askerKnowledge":"knows","technicalbackground":"Yes","useSO":"Yes","SOUse":"search|question|learn"}],"http://stackoverflow.com/questions/21306001/get-selected-row-on-right-mouse-click-on-kendo-grid":[{"author":"Mahib","moreThanOneQuestion":"No","whyProblem":"No","previousAttempts":"No","tone":"3","typeOfQuestion":"copypaste","askerKnowledge":"not","technicalbackground":"No","useSO":"No","SOUse":"na"},{"author":"mahib","moreThanOneQuestion":"No","whyProblem":"Yes","previousAttempts":"Yes","tone":"6","typeOfQuestion":"errormsg|tips","askerKnowledge":"clearquestion|knows|not|questionbackground|problemstory","technicalbackground":"No","useSO":"No","SOUse":"na"}],"http://stackoverflow.com/questions/20550163/no-advertisers-found-when-using-mcnearbyservicebrowser":[{"author":"john doe","moreThanOneQuestion":"No","whyProblem":"Yes","previousAttempts":"Yes","tone":"4","typeOfQuestion":"copypaste|tips","askerKnowledge":"clearquestion|knows|not|questionbackground|problemstory","technicalbackground":"No","useSO":"No","SOUse":"na"},{"author":"John doe","moreThanOneQuestion":"No","whyProblem":"Yes","previousAttempts":"Yes","tone":"5","typeOfQuestion":"copypaste|tips","askerKnowledge":"knows","technicalbackground":"Yes","useSO":"Yes","SOUse":"search|question|learn"}],"http://stackoverflow.com/questions/4725281/jquery-context-menu-on-left-click":[{"author":"Artworkad","moreThanOneQuestion":"No","whyProblem":"Yes","previousAttempts":"Yes","tone":"6","typeOfQuestion":"copypaste|errormsg|tips","askerKnowledge":"knows","technicalbackground":"Yes","useSO":"Yes","SOUse":"search|question|learn"},{"author":"artworkad","moreThanOneQuestion":"No","whyProblem":"No","previousAttempts":"No","tone":"5","typeOfQuestion":"copypaste|codequestion","askerKnowledge":"clearquestion|knows","technicalbackground":"Yes","useSO":"Yes","SOUse":"search|answer"}],"http://stackoverflow.com/questions/19472162/node-js-and-cheerio-parsing-table-with-selectors":[{"author":"Christian","moreThanOneQuestion":"Yes","whyProblem":"Yes","previousAttempts":"Yes","tone":"6","typeOfQuestion":"copypaste|errormsg|codequestion","askerKnowledge":"clearquestion","technicalbackground":"Yes","useSO":"No","SOUse":"search|answer|question"},{"author":"christian","moreThanOneQuestion":"Yes","whyProblem":"Yes","previousAttempts":"Yes","tone":"6","typeOfQuestion":"copypaste|codequestion|tips","askerKnowledge":"clearquestion|not|questionbackground|problemstory","technicalbackground":"No","useSO":"No","SOUse":"na"}],"http://stackoverflow.com/questions/21536572/generate-unique-id-in-java-to-label-groups-of-related-entries-in-a-log":[{"author":"souser","moreThanOneQuestion":"Yes","whyProblem":"Yes","previousAttempts":"Yes","tone":"4","typeOfQuestion":"tips","askerKnowledge":"questionbackground","technicalbackground":"No","useSO":"No","SOUse":"na"}],"http://stackoverflow.com/questions/3483110/set-font-at-runtime-textview":[{"author":"Marek Sabera","moreThanOneQuestion":"Yes","whyProblem":"No","previousAttempts":"No","tone":"4","typeOfQuestion":"codequestion","askerKnowledge":"not","technicalbackground":"No","useSO":"No","SOUse":"na"}],"http://stackoverflow.com/questions/11778922/how-to-save-image-into-database-java-vs-sql":[],"http://stackoverflow.com/questions/17472125/css3-transitions-only-works-on-the-first-element-in-safari":[{"author":"tobaiasjl","moreThanOneQuestion":"No","whyProblem":"Yes","previousAttempts":"Yes","tone":"4","typeOfQuestion":"copypaste","askerKnowledge":"not","technicalbackground":"No","useSO":"Yes","SOUse":"search|question|learn"}],"http://stackoverflow.com/questions/6054144/how-can-i-group-by-date-time-column-without-taking-time-into-consideration":[{"author":"The Muffin Man","moreThanOneQuestion":"No","whyProblem":"Yes","previousAttempts":"No","tone":"4","typeOfQuestion":"tips","askerKnowledge":"knows","technicalbackground":"No","useSO":"Yes","SOUse":"search|question|learn"}],"http://stackoverflow.com/questions/3861387/how-to-consume-json-as-input-in-put-and-post-method-of-rest-webservice-in-java":[{"author":"Senthil","moreThanOneQuestion":"Yes","whyProblem":"Yes","previousAttempts":"emptyanswer","tone":"4","typeOfQuestion":"tips","askerKnowledge":"questionbackground","technicalbackground":"No","useSO":"No","SOUse":"na"}],"http://stackoverflow.com/questions/8565955/create-class-diagram-from-java-source-code-rational-software-architect-7":[{"author":"gus","moreThanOneQuestion":"No","whyProblem":"No","previousAttempts":"No","tone":"4","typeOfQuestion":"tips","askerKnowledge":"not","technicalbackground":"No","useSO":"Yes","SOUse":"search|question|learn"}],"http://stackoverflow.com/questions/8712025/video-js-does-not-play-video-on-android-device":[{"author":" SripadRaj","moreThanOneQuestion":"No","whyProblem":"Yes","previousAttempts":"Yes","tone":"4","typeOfQuestion":"errormsg","askerKnowledge":"questionbackground","technicalbackground":"No","useSO":"No","SOUse":"na"}],"http://stackoverflow.com/questions/11480421/search-text-with-content-find-object-in-word-with-vba-and-recover-the-text-found":[],"http://stackoverflow.com/questions/11217700/how-to-use-rspec-to-test-a-sinatra-application-within-a-gem":[{"author":"Andrew","moreThanOneQuestion":"Yes","whyProblem":"Yes","previousAttempts":"No","tone":"4","typeOfQuestion":"copypaste","askerKnowledge":"not","technicalbackground":"No","useSO":"No","SOUse":"na"}]};
+
+var str = [];
+Object.keys(data).forEach(function (k) {
+	var answers = data[k];
+
+	answers.forEach(function (answer) {
+		str.push('<div class=\"soQuestion\"><a href="' + k + '">' + k + '</a>');    //<a href="http://www.w3schools.com">Visit W3Schools.com!</a>
+		Object.keys(answer).forEach(function (questionId) {
+			var answerText = answer[questionId];
+			str.push('<div class=\"question\">' + questionMap[questionId]);
+			str.push('<div class=\"answer\">');
+			answerText.split('|').forEach(function (text) {
+				str.push((questionMap[text] || text) + "<br/>");	
+			});
+			str.push('</div>');	
+			str.push('</div>');	
+		});		
+		str.push('</div>');
+	});
+
+});
+
+document.getElementById('content').innerHTML = str.join('');
+
+}
+</script>
+
+
+<style type="text/css">
+html {
+font-family: sans-serif;
+}
+
+.form-control {
+	display: block;
+width: 100%;
+height: 34px;
+padding: 6px 12px;
+font-size: 14px;
+line-height: 1.42857143;
+color: #555;
+background-color: #fff;
+background-image: none;
+border: 1px solid #ccc;
+border-radius: 4px;
+-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+-webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+.soQuestion {
+	background: #EEE;
+	padding: 20px;
+	margin: 5px;
+	border: 1px solid #333;
+}
+
+.question {
+	padding: 5px;
+	border-bottom: 1px dotted #AAA;
+	font-weight: bold;
+}
+
+.answer {
+	padding: 2px 15px;
+	color: #2655CE;
+	font-weight: normal;
+}
+</style>
+
+</head>
+<body>
+	<div class="form-group">
+						<label >Data</label>
+						<input id="data" type="text" class="form-control" ></input>
+						<button onclick="foo();">Generate</button>
+					</div>
+        <div id="content"></div>
+</body></html>
