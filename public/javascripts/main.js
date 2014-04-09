@@ -131,10 +131,10 @@ $(function() {
 				hits: hits
 			}),
 			success : function(data) {
+				data = addStackExchObjectiveInfo(data);
 				downloadHitResults(data);
 			},
-			error : function(data) {
-				
+			error : function(data) {			
 				console.log("error");
 				console.log(data);
 			}
@@ -142,5 +142,78 @@ $(function() {
 		
 	}
 	
+	var addStackExchObjectiveInfo = function(results) {
+		$.each(results, function(url, responses) {
+			var questionData = {};
+			console.log("Getting SO info for url: " + url);
+			var questionId = getQuestionIdFromUrl(url);
+			
+			var highestVotedResponse = window.stackExchange.getHighestVotedAnswerForQuestionId(questionId);
+			if (highestVotedResponse === undefined || highestVotedResponse === null)
+				questionData["SOQuestionData_HighestResponseVote"] 
+					= "n/a";
+			else
+				questionData["SOQuestionData_HighestResponseVote"] 
+					= highestVotedResponse.score;
+			
+			var highestReputationResponse = window.stackExchange.getHighestReputationAnswerForQuestionId(questionId);
+			if (highestReputationResponse === undefined || highestReputationResponse === null)
+				questionData["SOQuestionData_HighestResponseReputation"] 
+					= "n/a";
+			else
+				questionData["SOQuestionData_HighestResponseReputation"] 
+					= highestReputationResponse.owner.reputation;
+		
+			var highestRepPlusVoteResponse = window.stackExchange.getHighestVotePlusReputationAnswerForQuestionId(questionId);
+			if (highestRepPlusVoteResponse === undefined || highestRepPlusVoteResponse === null)
+				questionData["SOQuestionData_HighestResponseVotePlusReputation"] 
+					= "n/a";
+			else
+				questionData["SOQuestionData_HighestResponseVotePlusReputation"] 
+					= highestRepPlusVoteResponse.owner.reputation + highestRepPlusVoteResponse.score;
+		
+			var acceptedResponseTime = window.stackExchange.getResponseTimeOfAcceptedAnswerForQuestionId(questionId);
+			questionData["SOQuestionData_AcceptedResponseTime"] 
+				= acceptedResponseTime;
+			
+			var bestAnswerResponseTime = window.stackExchange.getResponseTimeOfHighestVotePlusReputationAnswerForQuestionId(questionId);
+			questionData["SOQuestionData_BestVotePlusReputationResponseTime"] 
+				= bestAnswerResponseTime;
+			
+			var answerCount = window.stackExchange.getNumberOfAnswersForQuestionId(questionId);
+			questionData["SOQuestionData_AnswerCount"] 
+				= answerCount;
+			
+			var viewCount = window.stackExchange.getViewCountForQuestionId(questionId);
+			questionData["SOQuestionData_ViewCount"] 
+				= viewCount;
+			
+			var questionVoteCount = window.stackExchange.getNumberOfVotesForQuestionId(questionId);
+			questionData["SOQuestionData_QuestionVoteCount"] 
+				= questionVoteCount;
+			
+			var author = window.stackExchange.getAuthorOfQuestionId(questionId);
+			questionData["SOQuestionData_QuestionAuthor"] 
+				= author;
+			
+			for (var i = 0; i < responses.length; i++) {
+				var addlInfo = responses[i]
+				$.each(questionData, function(key, value) {
+					addlInfo[key] = value;
+				});
+				responses[i] = addlInfo;
+			}
+		});
+		
+		return results;
+	}
+	
+	var getQuestionIdFromUrl = function(url) {
+		var path = url.split("/");
+		for (var i = 0; i < path.length; i++) {
+			if (path[i] === "questions")
+				return path[i+1];
+		}
+	}
 	
 });
