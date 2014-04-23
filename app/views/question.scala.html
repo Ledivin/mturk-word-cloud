@@ -4,7 +4,7 @@
   <Overview>
     <Title>Rate the Quality of this StackOverflow Question</Title>
     <Text>Thank you for helping us out with our subjective analysis of StackOverflow.com questions.</Text>
-    <Text>Please visit become familiar with the question at the following URL before answering the questions below.</Text>
+    <Text>Please become familiar with the question at the following URL before answering the questions below.</Text>
     <Text>@url</Text>
   </Overview>
   <Question>
@@ -19,9 +19,9 @@
     </AnswerSpecification>
   </Question>
   <Question>
-    <QuestionIdentifier>moreThanOneQuestion</QuestionIdentifier>
+    <QuestionIdentifier>acceptedAnswer</QuestionIdentifier>
     <QuestionContent>
-      <Text>Does the original poster ask more than one question in the post?</Text>
+      <Text>Does this question have an accepted answer (indicated by a green checkmark next to the answer)?</Text>
     </QuestionContent>
     <AnswerSpecification>
       <SelectionAnswer>
@@ -40,59 +40,28 @@
     </AnswerSpecification>
   </Question>
   <Question>
-    <QuestionIdentifier>whyProblem</QuestionIdentifier>
+    <QuestionIdentifier>numberQuestions</QuestionIdentifier>
     <QuestionContent>
-      <Text>Does the original poster explain how or why the problem was initially encountered?</Text>
+      <Text>How many questions does the poster ask in the original posting?</Text>
+    </QuestionContent>
+    <AnswerSpecification>
+      <FreeTextAnswer>
+        <NumberOfLinesSuggestion>1</NumberOfLinesSuggestion>
+      </FreeTextAnswer>
+    </AnswerSpecification>
+  </Question>
+  <Question>
+    <QuestionIdentifier>howWellHowOrWhy</QuestionIdentifier>
+    <QuestionContent>
+      <Text>Please rate how well the poster explains how or why the problem was initially encountered:</Text>
     </QuestionContent>
     <AnswerSpecification>
       <SelectionAnswer>
         <StyleSuggestion>radiobutton</StyleSuggestion>
-        <Selections>
-          <Selection>
-            <SelectionIdentifier>Yes</SelectionIdentifier>
-            <Text>Yes</Text>
-          </Selection>
-          <Selection>
-            <SelectionIdentifier>No</SelectionIdentifier>
-            <Text>No</Text>
-          </Selection>
-        </Selections>
-      </SelectionAnswer>
-    </AnswerSpecification>
-  </Question>
-  <Question>
-    <QuestionIdentifier>previousAttempts</QuestionIdentifier>
-    <QuestionContent>
-      <Text>Does the original poster discuss any previous attempts to solve the problem?</Text>
-    </QuestionContent>
-    <AnswerSpecification>
-      <SelectionAnswer>
-        <StyleSuggestion>radiobutton</StyleSuggestion>
-        <Selections>
-          <Selection>
-            <SelectionIdentifier>Yes</SelectionIdentifier>
-            <Text>Yes</Text>
-          </Selection>
-          <Selection>
-            <SelectionIdentifier>No</SelectionIdentifier>
-            <Text>No</Text>
-          </Selection>
-        </Selections>
-      </SelectionAnswer>
-    </AnswerSpecification>
-  </Question>
-  <Question>
-    <QuestionIdentifier>tone</QuestionIdentifier>
-    <QuestionContent>
-      <Text>On a scale of 1-7, please rate the overall tone of the original post.</Text>
-    </QuestionContent>
-    <AnswerSpecification>
-      <SelectionAnswer>
-        <StyleSuggestion>dropdown</StyleSuggestion>
         <Selections>
           <Selection>
             <SelectionIdentifier>1</SelectionIdentifier>
-            <Text>1 - Very negative</Text>
+            <Text>1 - Not at all</Text>
           </Selection>
           <Selection>
             <SelectionIdentifier>2</SelectionIdentifier>
@@ -104,7 +73,7 @@
           </Selection>
           <Selection>
             <SelectionIdentifier>4</SelectionIdentifier>
-            <Text>4 - Neutral</Text>
+            <Text>4</Text>
           </Selection>
           <Selection>
             <SelectionIdentifier>5</SelectionIdentifier>
@@ -116,7 +85,48 @@
           </Selection>
           <Selection>
             <SelectionIdentifier>7</SelectionIdentifier>
-            <Text>7 - Very positive</Text>
+            <Text>7 - The best description</Text>
+          </Selection>
+        </Selections>
+      </SelectionAnswer>
+    </AnswerSpecification>
+  </Question>
+  <Question>
+    <QuestionIdentifier>howMuchEffortIntoSolving</QuestionIdentifier>
+    <QuestionContent>
+      <Text>Please rate how much effort you believe was put into solving the problem prior to posting the question:</Text>
+    </QuestionContent>
+    <AnswerSpecification>
+      <SelectionAnswer>
+        <StyleSuggestion>radiobutton</StyleSuggestion>
+        <Selections>
+          <Selection>
+            <SelectionIdentifier>1</SelectionIdentifier>
+            <Text>1 - None at all</Text>
+          </Selection>
+          <Selection>
+            <SelectionIdentifier>2</SelectionIdentifier>
+            <Text>2</Text>
+          </Selection>
+          <Selection>
+            <SelectionIdentifier>3</SelectionIdentifier>
+            <Text>3</Text>
+          </Selection>
+          <Selection>
+            <SelectionIdentifier>4</SelectionIdentifier>
+            <Text>4</Text>
+          </Selection>
+          <Selection>
+            <SelectionIdentifier>5</SelectionIdentifier>
+            <Text>5</Text>
+          </Selection>
+          <Selection>
+            <SelectionIdentifier>6</SelectionIdentifier>
+            <Text>6</Text>
+          </Selection>
+          <Selection>
+            <SelectionIdentifier>7</SelectionIdentifier>
+            <Text>7 - As much as seems possible</Text>
           </Selection>
         </Selections>
       </SelectionAnswer>
@@ -140,12 +150,16 @@
              <Text>An exception code/error message; asks how to solve the problem</Text>
            </Selection>
            <Selection>
-		     <SelectionIdentifier>codequestion</SelectionIdentifier>
-			 <Text>A question about a few lines of code</Text>
+		          <SelectionIdentifier>codequestion</SelectionIdentifier>
+			        <Text>A question about a few lines of code</Text>
            </Selection>
            <Selection>
-			 <SelectionIdentifier>tips</SelectionIdentifier>
-			 <Text>General tips/best-practices</Text>
+			       <SelectionIdentifier>tips</SelectionIdentifier>
+			       <Text>General tips/best-practices</Text>
+           </Selection>
+            <Selection>
+             <SelectionIdentifier>other</SelectionIdentifier>
+             <Text>Other</Text>
            </Selection>
         </Selections>
       </SelectionAnswer>
@@ -160,14 +174,6 @@
       <SelectionAnswer>
         <StyleSuggestion>checkbox</StyleSuggestion>
         <Selections>
-           <Selection>
-			 <SelectionIdentifier>clearquestion</SelectionIdentifier>
-			 <Text>The poster asks a clear, direct question.</Text>
-           </Selection>
-          <Selection>
-            <SelectionIdentifier>knows</SelectionIdentifier>
-            <Text>The poster knows what question he/she needs to ask in order to get the information necessary to solve the problem.</Text>
-          </Selection>
           <Selection>
             <SelectionIdentifier>not</SelectionIdentifier>
             <Text>The poster makes a general request for any type of help solving a problem that he/she does not fully understand.</Text>
@@ -184,50 +190,194 @@
       </SelectionAnswer>
     </AnswerSpecification>
   </Question>
-  <Question>
-      <QuestionIdentifier>technicalbackground</QuestionIdentifier>
-      <QuestionContent>
-        <Text>Would you consider yourself to be a programmer?</Text>
-      </QuestionContent>
-      <AnswerSpecification>
-        <SelectionAnswer>
-          <StyleSuggestion>radiobutton</StyleSuggestion>
-          <Selections>
-            <Selection>
-              <SelectionIdentifier>Yes</SelectionIdentifier>
-              <Text>Yes</Text>
-            </Selection>
-            <Selection>
-              <SelectionIdentifier>No</SelectionIdentifier>
-              <Text>No</Text>
-            </Selection>
-          </Selections>
-        </SelectionAnswer>
-      </AnswerSpecification>
+<Question>
+    <QuestionIdentifier>howDirect</QuestionIdentifier>
+    <QuestionContent>
+      <Text>How direct is the question being asked?</Text>
+    </QuestionContent>
+    <AnswerSpecification>
+      <SelectionAnswer>
+        <StyleSuggestion>radiobutton</StyleSuggestion>
+        <Selections>
+          <Selection>
+            <SelectionIdentifier>1</SelectionIdentifier>
+            <Text>1 - Not at all direct, for example: “This is wrong.  Why?”</Text>
+          </Selection>
+          <Selection>
+            <SelectionIdentifier>2</SelectionIdentifier>
+            <Text>2</Text>
+          </Selection>
+          <Selection>
+            <SelectionIdentifier>3</SelectionIdentifier>
+            <Text>3</Text>
+          </Selection>
+          <Selection>
+            <SelectionIdentifier>4</SelectionIdentifier>
+            <Text>4</Text>
+          </Selection>
+          <Selection>
+            <SelectionIdentifier>5</SelectionIdentifier>
+            <Text>5</Text>
+          </Selection>
+          <Selection>
+            <SelectionIdentifier>6</SelectionIdentifier>
+            <Text>6</Text>
+          </Selection>
+          <Selection>
+            <SelectionIdentifier>7</SelectionIdentifier>
+            <Text>7 - Very direct</Text>
+          </Selection>
+        </Selections>
+      </SelectionAnswer>
+    </AnswerSpecification>
   </Question>
   <Question>
-        <QuestionIdentifier>useSO</QuestionIdentifier>
-        <QuestionContent>
-          <Text>Have you used StackOverflow.com before and/or do you know what StackOverflow.com is?</Text>
-        </QuestionContent>
-        <AnswerSpecification>
-          <SelectionAnswer>
-            <StyleSuggestion>radiobutton</StyleSuggestion>
-            <Selections>
-              <Selection>
-                <SelectionIdentifier>Yes</SelectionIdentifier>
-                <Text>Yes</Text>
-              </Selection>
-              <Selection>
-                <SelectionIdentifier>No</SelectionIdentifier>
-                <Text>No</Text>
-              </Selection>
-            </Selections>
-          </SelectionAnswer>
-        </AnswerSpecification>
+    <QuestionIdentifier>howKnowledgeable</QuestionIdentifier>
+    <QuestionContent>
+      <Text>How knowledgeable does the poster seem on this topic?</Text>
+    </QuestionContent>
+    <AnswerSpecification>
+      <SelectionAnswer>
+        <StyleSuggestion>radiobutton</StyleSuggestion>
+        <Selections>
+          <Selection>
+            <SelectionIdentifier>1</SelectionIdentifier>
+            <Text>1 - Not at all knowledgeable</Text>
+          </Selection>
+          <Selection>
+            <SelectionIdentifier>2</SelectionIdentifier>
+            <Text>2</Text>
+          </Selection>
+          <Selection>
+            <SelectionIdentifier>3</SelectionIdentifier>
+            <Text>3</Text>
+          </Selection>
+          <Selection>
+            <SelectionIdentifier>4</SelectionIdentifier>
+            <Text>4</Text>
+          </Selection>
+          <Selection>
+            <SelectionIdentifier>5</SelectionIdentifier>
+            <Text>5</Text>
+          </Selection>
+          <Selection>
+            <SelectionIdentifier>6</SelectionIdentifier>
+            <Text>6</Text>
+          </Selection>
+          <Selection>
+            <SelectionIdentifier>7</SelectionIdentifier>
+            <Text>7 - An expert</Text>
+          </Selection>
+        </Selections>
+      </SelectionAnswer>
+    </AnswerSpecification>
   </Question>
   <Question>
-        <QuestionIdentifier>SOUse</QuestionIdentifier>
+    <QuestionIdentifier>tone</QuestionIdentifier>
+    <QuestionContent>
+      <Text>Please list at least 3 comma-separated words to describe the tone of the question:</Text>
+    </QuestionContent>
+    <AnswerSpecification>
+      <FreeTextAnswer>
+        <NumberOfLinesSuggestion>1</NumberOfLinesSuggestion>
+      </FreeTextAnswer>
+    </AnswerSpecification>
+  </Question>
+  <Question>
+    <QuestionIdentifier>howImprove</QuestionIdentifier>
+    <QuestionContent>
+      <Text>How could the poster improve this question?</Text>
+    </QuestionContent>
+    <AnswerSpecification>
+      <FreeTextAnswer>
+        <NumberOfLinesSuggestion>3</NumberOfLinesSuggestion>
+      </FreeTextAnswer>
+    </AnswerSpecification>
+  </Question>
+<Question>
+    <QuestionIdentifier>technicalbackground</QuestionIdentifier>
+    <QuestionContent>
+      <Text>Please describe your proficiency as a programmer?</Text>
+    </QuestionContent>
+    <AnswerSpecification>
+      <SelectionAnswer>
+        <StyleSuggestion>radiobutton</StyleSuggestion>
+        <Selections>
+          <Selection>
+            <SelectionIdentifier>1</SelectionIdentifier>
+            <Text>1 - Not at all</Text>
+          </Selection>
+          <Selection>
+            <SelectionIdentifier>2</SelectionIdentifier>
+            <Text>2</Text>
+          </Selection>
+          <Selection>
+            <SelectionIdentifier>3</SelectionIdentifier>
+            <Text>3</Text>
+          </Selection>
+          <Selection>
+            <SelectionIdentifier>4</SelectionIdentifier>
+            <Text>4</Text>
+          </Selection>
+          <Selection>
+            <SelectionIdentifier>5</SelectionIdentifier>
+            <Text>5</Text>
+          </Selection>
+          <Selection>
+            <SelectionIdentifier>6</SelectionIdentifier>
+            <Text>6</Text>
+          </Selection>
+          <Selection>
+            <SelectionIdentifier>7</SelectionIdentifier>
+            <Text>7 - Many years of experience</Text>
+          </Selection>
+        </Selections>
+      </SelectionAnswer>
+    </AnswerSpecification>
+  </Question>
+<Question>
+    <QuestionIdentifier>useSO</QuestionIdentifier>
+    <QuestionContent>
+      <Text>How familiar are you with StackOverflow.com?</Text>
+    </QuestionContent>
+    <AnswerSpecification>
+      <SelectionAnswer>
+        <StyleSuggestion>radiobutton</StyleSuggestion>
+        <Selections>
+          <Selection>
+            <SelectionIdentifier>1</SelectionIdentifier>
+            <Text>1 - Never heard of it</Text>
+          </Selection>
+          <Selection>
+            <SelectionIdentifier>2</SelectionIdentifier>
+            <Text>2</Text>
+          </Selection>
+          <Selection>
+            <SelectionIdentifier>3</SelectionIdentifier>
+            <Text>3</Text>
+          </Selection>
+          <Selection>
+            <SelectionIdentifier>4</SelectionIdentifier>
+            <Text>4</Text>
+          </Selection>
+          <Selection>
+            <SelectionIdentifier>5</SelectionIdentifier>
+            <Text>5</Text>
+          </Selection>
+          <Selection>
+            <SelectionIdentifier>6</SelectionIdentifier>
+            <Text>6</Text>
+          </Selection>
+          <Selection>
+            <SelectionIdentifier>7</SelectionIdentifier>
+            <Text>7 - Use it every day</Text>
+          </Selection>
+        </Selections>
+      </SelectionAnswer>
+    </AnswerSpecification>
+  </Question>  
+  <Question>
+        <QuestionIdentifier>howUseSO</QuestionIdentifier>
         <QuestionContent>
           <Text>What do you primarily use StackOverflow for?</Text>
         </QuestionContent>
@@ -250,6 +400,14 @@
               <Selection>
   						  <SelectionIdentifier>learn</SelectionIdentifier>
   						  <Text>Learn something new.</Text>
+              </Selection>
+             <Selection>
+                <SelectionIdentifier>reputation</SelectionIdentifier>
+                <Text>Improve my reputation.</Text>
+              </Selection>              
+              <Selection>
+                <SelectionIdentifier>community</SelectionIdentifier>
+                <Text>Help the community.</Text>
               </Selection>
               <Selection>
   						  <SelectionIdentifier>na</SelectionIdentifier>
