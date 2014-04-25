@@ -45,7 +45,7 @@ public class Application extends Controller
 
         Map<String, String> hits = new HashMap<String, String>();
         for(JsonNode question : questions) {
-        	String url = question.get("link").asText();
+        	String url = question.asText();
             Logger.debug("Creating HIT for: " + url); 
             String id = turk.createHit(url, assignments, reward);
             Logger.debug("Created HIT: " + id);

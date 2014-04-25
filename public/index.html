@@ -29,8 +29,8 @@
 
 				<form id="stack_overflow_form" role="form">
 					<div class="form-group">
-						<label for="questions">Number of questions</label>
-						<input type="text" class="form-control" id="questions" value="10">
+						<label for="questions">StackOverflow question urls</label>
+						<textarea type="text" class="form-control" id="questions"></textarea>
 					</div>
 					<div class="form-group">
 						<label for="assignments">Number of assignments per question</label>
@@ -46,17 +46,16 @@
 				</form>
 			</div>
 		</div>
-
-		<div class="row">
+        
+        <div class="row">
             <div class="col-md-6 col-md-offset-2">
                 <p id="result"></p>
-                <a id="downloadjson" class="btn btn-default hidden">Download Json (to save objective info from SO)</a>
                 <table id="hits"></table>
             </div>
         </div>
-
+        
 		<div class="col-md-6 col-md-offset-2">
-			<h3>Generate json file containing results of HITs</h3>
+			<h3>Generate json file containing results</h3>
 
 			<button id="getHitOptions" class="btn btn-default">Get all HITs</button>
 			

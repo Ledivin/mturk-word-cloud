@@ -8,20 +8,15 @@ $(function() {
 		
 		$("#result").empty();
 		$("#hits").empty();
-		$("#downloadjson").addClass("hidden");
         
-        var numQuestions = $("#questions").val();
+        var questionUrlsString = $("#questions").val();
         var numAssignments = $("#assignments").val();
         var reward = $("#reward").val();
-        
-        // (this is blocking)
-        var questions = window.stackExchange.getQuestions(numQuestions);
-        console.log(questions);
-        
-        create_hit(questions, numAssignments, reward); 
 
-        // download ALL questions data in 1 file
-        downloadQuestionsForHit("myhits", questions);
+        // create array with questionUrls
+        var questionUrls = questionUrlsString.split(/[, \s]+/);
+        console.log(questionUrls);
+        create_hit(questionUrls, numAssignments, reward); 
 	});
 	
 	$("#getHitOptions").click(function() {
@@ -54,16 +49,6 @@ $(function() {
 
 		getResultsForHits(hits);
 	});
-	
-    var downloadQuestionsForHit = (function () {
-        return function (hitid, questions) {
-            var json = JSON.stringify(questions),
-                blob = new Blob([json], {type: "octet/stream"}),
-                url = window.URL.createObjectURL(blob);
-            $("#downloadjson").attr("href", url);
-            $("#downloadjson").attr("download", hitid + ".json");
-        };
-    }());
 
 	var create_hit = function(questions, assignments, reward) {
 		
@@ -85,8 +70,6 @@ $(function() {
                 for(var key in data) {
                 	$("#hits").append("<tr><td>" + key + "</td><td>" + data[key] + "</td></tr>");
                 }
-                
-                $("#downloadjson").removeClass("hidden");
 
 			},
 			error : function(data) {
