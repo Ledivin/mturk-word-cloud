@@ -40,6 +40,53 @@
     </AnswerSpecification>
   </Question>
   <Question>
+    <QuestionIdentifier>firstImpression</QuestionIdentifier>
+    <QuestionContent>
+      <Text>Which of these describe your first impression of the question:</Text>
+    </QuestionContent>
+    <AnswerSpecification>
+     <SelectionAnswer>
+      <StyleSuggestion>checkbox</StyleSuggestion>
+        <Selections>
+           <Selection>
+			 <SelectionIdentifier>simple</SelectionIdentifier>
+             <Text>Seems like a simple question</Text>
+           </Selection>
+           <Selection>
+             <SelectionIdentifier>short</SelectionIdentifier>
+             <Text>Very short</Text>
+           </Selection>
+          <Selection>
+             <SelectionIdentifier>tooLong</SelectionIdentifier>
+             <Text>Too much text/too long or “cluttered”</Text>
+           </Selection>
+           <Selection>
+		     <SelectionIdentifier>complex</SelectionIdentifier>
+             <Text>Very complex</Text>
+           </Selection>
+           <Selection>
+             <SelectionIdentifier>overwhelmed</SelectionIdentifier>
+             <Text>I'm overwhelmed</Text>
+           </Selection>
+            <OtherSelection>
+              	<NumberOfLinesSuggestion>1</NumberOfLinesSuggestion>
+            </OtherSelection>
+        </Selections>
+      </SelectionAnswer>
+    </AnswerSpecification>
+  </Question>  
+  <Question>
+    <QuestionIdentifier>questionDescription</QuestionIdentifier>
+    <QuestionContent>
+      <Text>In 3 words, describe the question the poster is asking.</Text>
+    </QuestionContent>
+    <AnswerSpecification>
+      <FreeTextAnswer>
+        <NumberOfLinesSuggestion>1</NumberOfLinesSuggestion>
+      </FreeTextAnswer>
+    </AnswerSpecification>
+  </Question>
+  <Question>
     <QuestionIdentifier>numberQuestions</QuestionIdentifier>
     <QuestionContent>
       <Text>How many questions does the poster ask in the original posting?</Text>
@@ -51,46 +98,73 @@
     </AnswerSpecification>
   </Question>
   <Question>
-    <QuestionIdentifier>howWellHowOrWhy</QuestionIdentifier>
+    <QuestionIdentifier>typeOfQuestion</QuestionIdentifier>
     <QuestionContent>
-      <Text>Please rate how well the poster explains how or why the problem was initially encountered:</Text>
+      <Text>Which of the following describe the question:</Text>
     </QuestionContent>
     <AnswerSpecification>
       <SelectionAnswer>
-        <StyleSuggestion>radiobutton</StyleSuggestion>
+        <StyleSuggestion>checkbox</StyleSuggestion>
         <Selections>
           <Selection>
-            <SelectionIdentifier>1</SelectionIdentifier>
-            <Text>1 - Not at all</Text>
-          </Selection>
-          <Selection>
-            <SelectionIdentifier>2</SelectionIdentifier>
-            <Text>2</Text>
-          </Selection>
-          <Selection>
-            <SelectionIdentifier>3</SelectionIdentifier>
-            <Text>3</Text>
-          </Selection>
-          <Selection>
-            <SelectionIdentifier>4</SelectionIdentifier>
-            <Text>4</Text>
-          </Selection>
-          <Selection>
-            <SelectionIdentifier>5</SelectionIdentifier>
-            <Text>5</Text>
-          </Selection>
-          <Selection>
-            <SelectionIdentifier>6</SelectionIdentifier>
-            <Text>6</Text>
-          </Selection>
-          <Selection>
-            <SelectionIdentifier>7</SelectionIdentifier>
-            <Text>7 - The best description</Text>
-          </Selection>
-        </Selections>
+             <SelectionIdentifier>copypaste</SelectionIdentifier>
+             <Text>A large chunk of code; asks what is wrong or for any advice</Text>
+           </Selection>
+           <Selection>
+             <SelectionIdentifier>errormsg</SelectionIdentifier>
+             <Text>An exception code/error message; asks how to solve the problem</Text>
+           </Selection>
+           <Selection>
+		      <SelectionIdentifier>advice</SelectionIdentifier>
+			  <Text>A general request for advice or guidance</Text>
+           </Selection>
+           <Selection>
+		      <SelectionIdentifier>codequestion</SelectionIdentifier>
+			  <Text>A question about a few lines of code</Text>
+           </Selection>
+           <Selection>
+			   <SelectionIdentifier>specificQuestion</SelectionIdentifier>
+			   <Text>A specific, direct question about an issue being encountered</Text>
+           </Selection>
+            <OtherSelection>
+              	<NumberOfLinesSuggestion>1</NumberOfLinesSuggestion>
+            </OtherSelection>
+          </Selections>
       </SelectionAnswer>
     </AnswerSpecification>
-  </Question>
+  </Question>    
+  <Question>
+    <QuestionIdentifier>describePriorEffort</QuestionIdentifier>
+    <QuestionContent>
+      <Text>How does the poster describe their efforts to solve the problem prior to posting on StackOverflow?</Text>
+    </QuestionContent>
+    <AnswerSpecification>
+      <SelectionAnswer>
+        <StyleSuggestion>checkbox</StyleSuggestion>
+        <Selections>
+          <Selection>
+             <SelectionIdentifier>tellStory</SelectionIdentifier>
+             <Text>Describes what they did which led to the problem (tell a story about how they ran into the issue)</Text>
+           </Selection>
+           <Selection>
+             <SelectionIdentifier>altSolution</SelectionIdentifier>
+             <Text>Describes at least one alternate solution they attempted which still didn’t work</Text>
+           </Selection>
+           <Selection>
+		      <SelectionIdentifier>research</SelectionIdentifier>
+			  <Text>Describes/links to at least one solution they researched online or from a book</Text>
+           </Selection>
+            <Selection>
+             <SelectionIdentifier>none</SelectionIdentifier>
+             <Text>It doesn't seem like they spent much time before posting the question.</Text>
+           </Selection>
+            <OtherSelection>
+              	<NumberOfLinesSuggestion>1</NumberOfLinesSuggestion>
+            </OtherSelection>
+          </Selections>
+      </SelectionAnswer>
+    </AnswerSpecification>
+  </Question>     
   <Question>
     <QuestionIdentifier>howMuchEffortIntoSolving</QuestionIdentifier>
     <QuestionContent>
@@ -127,105 +201,6 @@
           <Selection>
             <SelectionIdentifier>7</SelectionIdentifier>
             <Text>7 - As much as seems possible</Text>
-          </Selection>
-        </Selections>
-      </SelectionAnswer>
-    </AnswerSpecification>
-  </Question>
-  <Question>
-    <QuestionIdentifier>typeOfQuestion</QuestionIdentifier>
-    <QuestionContent>
-      <Text>Which of the following describe the question:</Text>
-    </QuestionContent>
-    <AnswerSpecification>
-      <SelectionAnswer>
-        <StyleSuggestion>checkbox</StyleSuggestion>
-        <Selections>
-          <Selection>
-             <SelectionIdentifier>copypaste</SelectionIdentifier>
-             <Text>A large chunk of code; asks what is wrong or for any advice</Text>
-           </Selection>
-           <Selection>
-             <SelectionIdentifier>errormsg</SelectionIdentifier>
-             <Text>An exception code/error message; asks how to solve the problem</Text>
-           </Selection>
-           <Selection>
-		          <SelectionIdentifier>codequestion</SelectionIdentifier>
-			        <Text>A question about a few lines of code</Text>
-           </Selection>
-           <Selection>
-			       <SelectionIdentifier>tips</SelectionIdentifier>
-			       <Text>General tips/best-practices</Text>
-           </Selection>
-            <Selection>
-             <SelectionIdentifier>other</SelectionIdentifier>
-             <Text>Other</Text>
-           </Selection>
-        </Selections>
-      </SelectionAnswer>
-    </AnswerSpecification>
-  </Question>
-  <Question>
-    <QuestionIdentifier>askerKnowledge</QuestionIdentifier>
-    <QuestionContent>
-      <Text>Which of the following describe the question:</Text>
-    </QuestionContent>
-    <AnswerSpecification>
-      <SelectionAnswer>
-        <StyleSuggestion>checkbox</StyleSuggestion>
-        <Selections>
-          <Selection>
-            <SelectionIdentifier>not</SelectionIdentifier>
-            <Text>The poster makes a general request for any type of help solving a problem that he/she does not fully understand.</Text>
-          </Selection>
-          <Selection>
-		    <SelectionIdentifier>questionbackground</SelectionIdentifier>
-			<Text>The poster tells a story about how they ran into the issue.</Text>
-          </Selection>
-          <Selection>
-			<SelectionIdentifier>problemstory</SelectionIdentifier>
-			<Text>The poster explains what they have already done.</Text>
-          </Selection>
-        </Selections>
-      </SelectionAnswer>
-    </AnswerSpecification>
-  </Question>
-<Question>
-    <QuestionIdentifier>howDirect</QuestionIdentifier>
-    <QuestionContent>
-      <Text>How direct is the question being asked?</Text>
-    </QuestionContent>
-    <AnswerSpecification>
-      <SelectionAnswer>
-        <StyleSuggestion>radiobutton</StyleSuggestion>
-        <Selections>
-          <Selection>
-            <SelectionIdentifier>1</SelectionIdentifier>
-            <Text>1 - Not at all direct, for example: “This is wrong.  Why?”</Text>
-          </Selection>
-          <Selection>
-            <SelectionIdentifier>2</SelectionIdentifier>
-            <Text>2</Text>
-          </Selection>
-          <Selection>
-            <SelectionIdentifier>3</SelectionIdentifier>
-            <Text>3</Text>
-          </Selection>
-          <Selection>
-            <SelectionIdentifier>4</SelectionIdentifier>
-            <Text>4</Text>
-          </Selection>
-          <Selection>
-            <SelectionIdentifier>5</SelectionIdentifier>
-            <Text>5</Text>
-          </Selection>
-          <Selection>
-            <SelectionIdentifier>6</SelectionIdentifier>
-            <Text>6</Text>
-          </Selection>
-          <Selection>
-            <SelectionIdentifier>7</SelectionIdentifier>
-            <Text>7 - Very direct</Text>
           </Selection>
         </Selections>
       </SelectionAnswer>
@@ -275,7 +250,7 @@
   <Question>
     <QuestionIdentifier>tone</QuestionIdentifier>
     <QuestionContent>
-      <Text>Please list at least 3 comma-separated words to describe the tone of the question:</Text>
+      <Text>Please list at least 3 words to describe the tone of the question:</Text>
     </QuestionContent>
     <AnswerSpecification>
       <FreeTextAnswer>
@@ -297,7 +272,7 @@
 <Question>
     <QuestionIdentifier>technicalbackground</QuestionIdentifier>
     <QuestionContent>
-      <Text>Please describe your proficiency as a programmer?</Text>
+      <Text>Please describe your proficiency as a programmer.</Text>
     </QuestionContent>
     <AnswerSpecification>
       <SelectionAnswer>

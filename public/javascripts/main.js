@@ -15,7 +15,7 @@ $(function() {
 
         // create array with questionUrls
         var questionUrls = questionUrlsString.split(/[, \s]+/);
-        console.log(questionUrls);
+
         create_hit(questionUrls, numAssignments, reward); 
 	});
 	
